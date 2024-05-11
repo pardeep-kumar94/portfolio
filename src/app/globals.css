@@ -31,3 +31,21 @@ body {
     text-wrap: balance;
   }
 }
+
+
+.card:hover {
+  background-color: #8892b012;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#experience {
+  scroll-behavior: smooth;
+}
+
+/* .non-scrollable {
+  overflow: hidden; 
+}
+
+.scrollable {
+  overflow-y: auto; 
+} */
