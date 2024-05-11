@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Card from "./shared/card";
+import AnimatedLink from "./shared/animatedLink";
 
 
 const Projects = () => {
@@ -18,6 +20,8 @@ const Projects = () => {
                     <Card />
                 )
             })}
+
+            <AnimatedLink linkName={'View Full Project'} linkMessage={'Archive'}  linkHref={"/projects"}/>
         </div>
     )
 }
