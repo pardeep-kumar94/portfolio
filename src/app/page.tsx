@@ -2,6 +2,8 @@ import Profile from '@/components/profile'
 import './globals.css'
 import AboutMe from './../components/aboutMe'
 import WorkExperience from '../components/workExperience'
+import Projects from '@/components/projects';
+import Card from '@/components/shared/card';
 
 export default function Home() {
   return (
@@ -10,6 +12,7 @@ export default function Home() {
         <div className='flex-1  pl-5 pr-5 lg:pl-32 lg:pr-32 scrollable'>
           <AboutMe />
           <WorkExperience/>
+          <Projects/>
         </div>
     </div>
   );
