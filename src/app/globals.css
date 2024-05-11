@@ -42,10 +42,14 @@ body {
   scroll-behavior: smooth;
 }
 
-/* .non-scrollable {
-  overflow: hidden; 
+.non-scrollable {
+  /* overflow: hidden;  */
 }
 
 .scrollable {
   overflow-y: auto; 
-} */
+}
+
+.cardBackground {
+  background-color: #112240;
+}
