@@ -6,6 +6,4 @@ const Pill =({name})=> {
     )
 }
 
-
-
 export default Pill;

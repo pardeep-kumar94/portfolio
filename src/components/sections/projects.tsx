@@ -1,6 +1,7 @@
 import Link from "next/link";
-import Card from "./shared/card";
-import AnimatedLink from "./shared/animatedLink";
+import Card from "@/components/shared/card";
+import AnimatedLink from "@/components/shared/animatedLink";
+import SectionHeader from "../shared/sectionHeader";
 
 
 const Projects = () => {
@@ -15,6 +16,7 @@ const Projects = () => {
     }]
     return (
         <div id="project">
+            <SectionHeader name={'Projects'} />
             {project.map((element, index)=> {
                 return (
                     <Card />

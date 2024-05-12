@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import "../app/globals.css"
+import "@/app/globals.css"
 import { Content } from "@/config/content"
 import { useState } from "react"
 const { navigationLinks } = Content

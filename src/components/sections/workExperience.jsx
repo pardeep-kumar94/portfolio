@@ -1,4 +1,5 @@
-import Pill from '../components/pill'
+import Pill from '@/components/shared/pill'
+import SectionHeader from '../shared/sectionHeader';
 
 const Experience = () => {
     const experiences = [{
@@ -31,7 +32,7 @@ const Experience = () => {
 
 
     const experienceCard = experiences.map((element,index)=> {
-        return <div key={index} className='mt-10 card pt-5 pb-5 pl-0 pl-0 lg:pl-3 lg:pr-3 '>
+        return <div key={index} className='mt-2 lg:mt-12 card pt-5 pb-5 pl-0 pl-0 lg:pl-3 lg:pr-3 '>
                     <div className="flex flex-col lg:flex-row">
                         <p className="flex-[0.3] font-extralight text-xs text-stone-300">{element.date}</p>
                         <div className="flex-1">
@@ -54,6 +55,9 @@ const WorkExperience = () => {
    
     return (
      <div id='experience'>
+        <div className='mt-10 lg:mt-0'>
+         <SectionHeader name={'Work Experience'} />
+        </div>
         {Experience()}
      
     </div>

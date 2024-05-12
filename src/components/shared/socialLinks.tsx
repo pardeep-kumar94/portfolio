@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "../app/globals.css"
+import "@/app/globals.css"
 import Link from "next/link";
 import { Content } from "@/config/content";
 
