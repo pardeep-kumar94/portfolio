@@ -2,28 +2,21 @@ import Link from "next/link";
 import Card from "@/components/shared/card";
 import AnimatedLink from "@/components/shared/animatedLink";
 import SectionHeader from "../shared/sectionHeader";
+import { Content } from "@/config/content";
 
 
 const Projects = () => {
-    const project = [{
-        imageUrl: 'https://brittanychiang.com/_next/image?url=%2Fimages%2Fprojects%2Fcourse-card.png&w=640&q=75',
-        title:'Build a Spotify Connected App', 
-        description: 'Video course that teaches how to build a web app with the Spotify Web API. Topics covered include the principles of REST APIs, user auth flows, Node, Express, React, Styled Components, and more.',
-    }, {
-        imageUrl: 'https://brittanychiang.com/_next/image?url=%2Fimages%2Fprojects%2Fcourse-card.png&w=640&q=75',
-        title:'Build a Spotify Connected App', 
-        description: 'Video course that teaches how to build a web app with the Spotify Web API. Topics covered include the principles of REST APIs, user auth flows, Node, Express, React, Styled Components, and more.',
-    }]
+const {projects} = Content;
     return (
         <div id="project">
             <SectionHeader name={'Projects'} />
-            {project.map((element, index)=> {
+            {projects.map((element, index)=> {
                 return (
-                    <Card />
+                    <Card imgSrc={element.imageUrl} name={element.title} description={element.description}  links={element.links} />
                 )
             })}
 
-            <AnimatedLink linkName={'View Full Project'} linkMessage={'Archive'}  linkHref={"/projects"}/>
+            {/* <AnimatedLink linkName={'View Full Project'} linkMessage={'Archive'}  linkHref={"/projects"}/> */}
         </div>
     )
 }
