@@ -14,7 +14,7 @@ const Projects = () => {
         description: 'Video course that teaches how to build a web app with the Spotify Web API. Topics covered include the principles of REST APIs, user auth flows, Node, Express, React, Styled Components, and more.',
     }]
     return (
-        <div>
+        <div id="project">
             {project.map((element, index)=> {
                 return (
                     <Card />
