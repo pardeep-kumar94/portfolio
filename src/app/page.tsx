@@ -7,31 +7,34 @@ import Skills from "@/components/Skills";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import FloatingNav from "@/components/FloatingNav";
-import type { Achievement, Role, Skill, CaseStudy, ContactLink, HeroField, HeroStat, SummaryContent, ConfigEntry } from "@/lib/notion";
+import {
+  getAchievements,
+  getRoles,
+  getSkills,
+  getCaseStudies,
+  getContact,
+  getHero,
+  getHeroStats,
+  getSummary,
+  getConfig,
+} from "@/lib/notion";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-const REVALIDATE = 3600;
-
-async function fetchJSON<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE_URL}${path}`, { next: { revalidate: REVALIDATE } });
-  if (!res.ok) throw new Error(`Failed to fetch ${path}: ${res.status}`);
-  return res.json() as Promise<T>;
-}
+export const revalidate = 3600;
 
 export default async function Home() {
   const [achievements, roles, skillsData, productStudies, managementStudies, books, contactLinks, hero, heroStats, summaryData, config] =
     await Promise.allSettled([
-      fetchJSON<Achievement[]>("/api/portfolio/achievements"),
-      fetchJSON<Role[]>("/api/portfolio/roles"),
-      fetchJSON<{ skills: Skill[]; competencies: string[] }>("/api/portfolio/skills"),
-      fetchJSON<CaseStudy[]>("/api/portfolio/case-studies?type=Product"),
-      fetchJSON<CaseStudy[]>("/api/portfolio/case-studies?type=Management"),
-      fetchJSON<CaseStudy[]>("/api/portfolio/case-studies"),
-      fetchJSON<ContactLink[]>("/api/portfolio/contact"),
-      fetchJSON<HeroField[]>("/api/portfolio/hero"),
-      fetchJSON<HeroStat[]>("/api/portfolio/hero-stats"),
-      fetchJSON<SummaryContent[]>("/api/portfolio/summary"),
-      fetchJSON<ConfigEntry[]>("/api/portfolio/config"),
+      getAchievements(),
+      getRoles(),
+      getSkills(),
+      getCaseStudies("Product"),
+      getCaseStudies("Management"),
+      getCaseStudies(),
+      getContact(),
+      getHero(),
+      getHeroStats(),
+      getSummary(),
+      getConfig(),
     ]);
 
   const configEntries = config.status === "fulfilled" ? config.value : [];
