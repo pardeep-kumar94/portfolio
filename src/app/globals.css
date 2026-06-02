@@ -1,26 +1,161 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --color-ink: #1a1a1a;
+  --color-paper: #f5f0e8;
+  --color-cream: #ede7db;
+  --color-accent: #c44b2b;
+  --color-accent-dark: #9e3a20;
+  --color-charcoal: #2a2a2a;
+  --color-slate: #6b6b6b;
+  --color-whisper: #d4cfc6;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-2xl: 10rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+/* ── Mobile Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Cover */
+  .cover-inner {
+    padding: 1.5rem !important;
+  }
+  .cover-main {
+    flex-direction: column !important;
+    padding: 3rem 0 2rem !important;
+    gap: 2rem !important;
+    align-items: flex-start !important;
+  }
+  .cover-photo {
+    display: none !important;
+  }
+  .cover-stats {
+    flex-wrap: wrap !important;
+    gap: 1.25rem 2rem !important;
+  }
+
+  /* Summary */
+  .summary-section {
+    padding: 4rem 1.5rem !important;
+  }
+  .summary-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .summary-label-col {
+    display: none !important;
+  }
+  .summary-pullquote {
+    border-left: none !important;
+    border-top: 3px solid var(--color-accent) !important;
+    padding: 1.5rem 0 0 !important;
+    margin-top: 1rem !important;
+  }
+
+  /* Achievements */
+  .achievements-section {
+    padding: 4rem 1.5rem !important;
+  }
+  .achievements-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .achievement-cell {
+    padding: 2rem 1rem !important;
+  }
+
+  /* Experience */
+  .experience-section {
+    padding: 4rem 1.5rem !important;
+  }
+  .role-card {
+    grid-template-columns: 1fr !important;
+    padding: 2rem 1.25rem !important;
+    gap: 1.5rem !important;
+  }
+  .role-sidebar {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+  }
+  .product-slide-inner {
+    flex-direction: column !important;
+  }
+
+  /* Skills */
+  .skills-section {
+    padding: 4rem 1.5rem !important;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .skill-cell {
+    padding: 2rem 1.5rem !important;
+  }
+  .competencies-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Education */
+  .education-section {
+    padding: 4rem 1.5rem !important;
+  }
+  .edu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .edu-card {
+    padding: 2rem !important;
+  }
+
+  /* Section number watermarks — reduce size on mobile */
+  .section-number {
+    font-size: 4rem !important;
+  }
+
+  /* Case Studies */
+  .casestudies-section {
+    padding: 4rem 1rem !important;
+  }
+  .book-container {
+    height: auto !important;
+    min-height: 400px !important;
+  }
+
+  /* FloatingNav — hide on mobile (takes too much space) */
+  nav[aria-label="Page sections"] {
+    display: none !important;
+  }
 }
