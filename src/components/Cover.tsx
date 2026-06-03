@@ -71,7 +71,7 @@ export default function Cover({ hero, heroStats }: CoverProps) {
           margin: "0 auto",
           padding: "var(--space-lg, 4rem)",
           display: "grid",
-          gridTemplateRows: "auto 1fr auto auto",
+          gridTemplateRows: "1fr auto auto",
           minHeight: "100vh",
         }}
       >
@@ -90,7 +90,7 @@ export default function Cover({ hero, heroStats }: CoverProps) {
       >
 
         {/* LEFT: Text */}
-        <div className="flex-1 flex flex-col items-start">
+        <div className="cover-text flex-1 flex flex-col items-start">
           {/* Name */}
           <motion.h1
             style={{
@@ -218,7 +218,7 @@ export default function Cover({ hero, heroStats }: CoverProps) {
       >
         <div className="cover-stats" style={{ display: "flex", gap: "var(--space-lg, 4rem)", flexWrap: "wrap" }}>
           {heroStats.map(({ value, label }) => (
-            <div key={label} style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            <div key={label} style={{ display: "flex", flexDirection: "column", gap: "0.25rem", alignItems: "center" }}>
               <span
                 style={{
                   color: "var(--color-accent)",

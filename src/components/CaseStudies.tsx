@@ -1054,11 +1054,13 @@ export default function CaseStudies({
   managementCaseStudies,
   books,
   showDeepDives = true,
+  sectionNumber = 4,
 }: {
   productCaseStudies: CaseStudy[];
   managementCaseStudies: CaseStudy[];
   books?: CaseStudy[];
   showDeepDives?: boolean;
+  sectionNumber?: number;
 }) {
   const [activeBook, setActiveBook] = useState<number | null>(null);
   const [overlayState, setOverlayState] = useState<"hidden" | "overlay-flip" | "overlay-open">("hidden");
@@ -1107,7 +1109,7 @@ export default function CaseStudies({
           fontFamily: "var(--font-display)", fontSize: "6rem", fontWeight: 800,
           lineHeight: 1, opacity: 0.08, display: "block", marginBottom: "-2rem", userSelect: "none",
         }}>
-          03
+            {String(sectionNumber).padStart(2, "0")}
         </span>
         <h2 style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 3.5rem)",

@@ -52,15 +52,38 @@ body {
   /* Cover */
   .cover-inner {
     padding: 1.5rem !important;
+    grid-template-rows: auto auto auto !important;
+    min-height: 100vh !important;
   }
   .cover-main {
     flex-direction: column !important;
-    padding: 3rem 0 2rem !important;
-    gap: 2rem !important;
+    padding: 2rem 0 1.5rem !important;
+    gap: 1.5rem !important;
     align-items: flex-start !important;
   }
+  /* Show profile pic on mobile, centered at top */
   .cover-photo {
-    display: none !important;
+    display: flex !important;
+    order: -1 !important;
+    width: 100% !important;
+    justify-content: center !important;
+    align-self: center !important;
+  }
+  .cover-photo > div {
+    width: 160px !important;
+    height: 160px !important;
+  }
+  /* Center the text content on mobile */
+  .cover-text {
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .cover-text h1 {
+    margin-bottom: 0.5rem !important;
+  }
+  .cover-text p {
+    margin-top: 0.75rem !important;
   }
   .cover-stats {
     flex-wrap: wrap !important;
@@ -69,11 +92,11 @@ body {
 
   /* Summary */
   .summary-section {
-    padding: 4rem 1.5rem !important;
+    padding: 3rem 1.5rem !important;
   }
   .summary-grid {
     grid-template-columns: 1fr !important;
-    gap: 2rem !important;
+    gap: 1.5rem !important;
   }
   .summary-label-col {
     display: none !important;
@@ -87,23 +110,35 @@ body {
 
   /* Achievements */
   .achievements-section {
-    padding: 4rem 1.5rem !important;
+    padding: 3rem 1.5rem !important;
   }
   .achievements-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
   .achievement-cell {
-    padding: 2rem 1rem !important;
+    padding: 1.5rem 1rem !important;
+    /* Reset borders for 2-col layout */
+    border-right: 1px solid var(--color-whisper) !important;
+    border-bottom: 1px solid var(--color-whisper) !important;
+  }
+  /* Remove right border on even cells (last column in 2-col) */
+  .achievement-cell:nth-child(2n) {
+    border-right: none !important;
+  }
+  /* Remove bottom border on last row cells */
+  .achievement-cell:last-child,
+  .achievement-cell:nth-last-child(2):nth-child(odd) {
+    border-bottom: none !important;
   }
 
   /* Experience */
   .experience-section {
-    padding: 4rem 1.5rem !important;
+    padding: 3rem 1.5rem !important;
   }
   .role-card {
     grid-template-columns: 1fr !important;
-    padding: 2rem 1.25rem !important;
-    gap: 1.5rem !important;
+    padding: 1.5rem 1.25rem !important;
+    gap: 1.25rem !important;
   }
   .role-sidebar {
     flex-direction: row !important;
@@ -116,28 +151,52 @@ body {
 
   /* Skills */
   .skills-section {
-    padding: 4rem 1.5rem !important;
+    padding: 3rem 1.5rem !important;
   }
   .skills-grid {
     grid-template-columns: 1fr !important;
   }
   .skill-cell {
-    padding: 2rem 1.5rem !important;
+    padding: 1.5rem !important;
   }
   .competencies-grid {
     grid-template-columns: 1fr !important;
   }
 
+  /* Other Projects */
+  .other-projects-section {
+    padding: 3rem 1.5rem !important;
+  }
+  .other-projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .other-project-card {
+    padding: 1.5rem !important;
+  }
+
+  /* Other Achievements */
+  .other-achievements-section {
+    padding: 3rem 1.5rem !important;
+  }
+  .other-achievements-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .other-achievement-card {
+    padding: 1.5rem !important;
+  }
+
   /* Education */
   .education-section {
-    padding: 4rem 1.5rem !important;
+    padding: 3rem 1.5rem !important;
   }
   .edu-grid {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
   }
   .edu-card {
-    padding: 2rem !important;
+    padding: 1.5rem !important;
   }
 
   /* Section number watermarks — reduce size on mobile */
@@ -147,11 +206,28 @@ body {
 
   /* Case Studies */
   .casestudies-section {
-    padding: 4rem 1rem !important;
+    padding: 3rem 1rem !important;
   }
   .book-container {
     height: auto !important;
     min-height: 400px !important;
+  }
+
+  /* Contact */
+  .contact-row {
+    flex-direction: column !important;
+  }
+  .contact-form-row {
+    grid-template-columns: 1fr !important;
+  }
+  .contact-inner {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  #contact h2 {
+    font-size: clamp(1.75rem, 7vw, 3rem) !important;
   }
 
   /* FloatingNav — hide on mobile (takes too much space) */

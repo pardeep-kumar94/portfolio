@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import type { Skill } from "@/lib/notion";
 
-export default function Skills({ skills, competencies }: { skills: Skill[]; competencies: string[] }) {
+export default function Skills({ skills, competencies, sectionNumber = 5 }: { skills: Skill[]; competencies: string[]; sectionNumber?: number }) {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
 
@@ -35,7 +35,7 @@ export default function Skills({ skills, competencies }: { skills: Skill[]; comp
               lineHeight: 1,
             }}
           >
-            03
+            {String(sectionNumber).padStart(2, "0")}
           </span>
           <h2
             style={{

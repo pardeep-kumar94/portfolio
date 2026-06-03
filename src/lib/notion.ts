@@ -10,6 +10,11 @@ export interface Achievement {
   desc: string;
 }
 
+export interface ProductLink {
+  label: string;
+  url: string;
+}
+
 export interface Product {
   tag: string;
   title: string;
@@ -19,6 +24,7 @@ export interface Product {
   mockupName: string;
   mockupImage?: string;
   productLink?: string;
+  links?: ProductLink[];
   features: string[];
   dark?: boolean;
 }
@@ -147,6 +153,13 @@ function getFileUrl(prop: NotionProp | undefined): string | undefined {
   return f.type === "file" ? f.file?.url : f.external?.url;
 }
 
+function getFileUrls(prop: NotionProp | undefined): string[] {
+  if (!prop) return [];
+  const p = prop as { type?: string; files?: { type: string; file?: { url: string }; external?: { url: string } }[] };
+  if (p.type !== "files" || !p.files?.length) return [];
+  return p.files.map((f) => (f.type === "file" ? f.file?.url : f.external?.url)).filter(Boolean) as string[];
+}
+
 function getRelationIds(prop: NotionProp | undefined): string[] {
   if (!prop) return [];
   const p = prop as { type?: string; relation?: { id: string }[] };
@@ -154,6 +167,14 @@ function getRelationIds(prop: NotionProp | undefined): string[] {
 }
 
 function parseStats(raw: string): { num: string; label: string }[] {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+function parseLinks(raw: string): ProductLink[] {
   try {
     return JSON.parse(raw);
   } catch {
@@ -213,6 +234,7 @@ export async function getRoles(): Promise<Role[]> {
       mockupName: getText(p["MockupName"]),
       mockupImage: getUrl(p["MockupImage"]),
       productLink: getUrl(p["ProductLink"]),
+      links: parseLinks(getText(p["Links"])),
       features: getMultiSelect(p["Features"]) ?? [],
       dark: getCheckbox(p["Dark"]) || undefined,
     };
@@ -454,6 +476,23 @@ export async function getHeroStats(): Promise<HeroStat[]> {
     .filter((s) => s.value);
 }
 
+export interface OtherProject {
+  title: string;
+  description: string;
+  link?: string;
+  screenshots: string[];
+  stack: string[];
+}
+
+export interface OtherAchievement {
+  title: string;
+  category: string;
+  issuer: string;
+  year: string;
+  description: string;
+  link?: string;
+}
+
 export interface ConfigEntry {
   key: string;
   visible: boolean;
@@ -472,6 +511,47 @@ export async function getConfig(): Promise<ConfigEntry[]> {
       };
     })
     .filter((c) => c.key);
+}
+
+export async function getOtherAchievements(): Promise<OtherAchievement[]> {
+  const res = await notion.dataSources.query({
+    data_source_id: process.env.NOTION_DS_OTHER_ACHIEVEMENTS!,
+    sorts: [{ property: "Order", direction: "ascending" }],
+    filter: { property: "Visible", checkbox: { equals: true } },
+  });
+  return res.results
+    .map((page) => {
+      const p = getProps(page);
+      return {
+        title: getText(p["Title"]),
+        category: getSelect(p["Category"]),
+        issuer: getText(p["Issuer"]),
+        year: getText(p["Year"]),
+        description: getText(p["Description"]),
+        link: getUrl(p["Link"]),
+      };
+    })
+    .filter((a) => a.title);
+}
+
+export async function getOtherProjects(): Promise<OtherProject[]> {
+  const res = await notion.dataSources.query({
+    data_source_id: process.env.NOTION_DS_OTHER_PROJECTS!,
+    sorts: [{ property: "Order", direction: "ascending" }],
+    filter: { property: "Visible", checkbox: { equals: true } },
+  });
+  return res.results
+    .map((page) => {
+      const p = getProps(page);
+      return {
+        title: getText(p["Title"]),
+        description: getText(p["Description"]),
+        link: getUrl(p["Link"]),
+        screenshots: getFileUrls(p["Screenshots"]),
+        stack: getText(p["Stack"]).split(",").map((s) => s.trim()).filter(Boolean),
+      };
+    })
+    .filter((proj) => proj.title);
 }
 
 export async function getContact(): Promise<ContactLink[]> {

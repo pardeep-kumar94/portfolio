@@ -16,7 +16,7 @@ const educationData = [
   },
 ];
 
-export default function Education() {
+export default function Education({ sectionNumber = 7 }: { sectionNumber?: number }) {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
 
@@ -47,7 +47,7 @@ export default function Education() {
               lineHeight: 1,
             }}
           >
-            04
+            {String(sectionNumber).padStart(2, "0")}
           </span>
           <h2
             style={{

@@ -6,7 +6,7 @@ import type { Achievement } from "@/lib/notion";
 
 const COLS = 3;
 
-export default function Achievements({ achievements }: { achievements: Achievement[] }) {
+export default function Achievements({ achievements, sectionNumber = 1 }: { achievements: Achievement[]; sectionNumber?: number }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -57,7 +57,7 @@ export default function Achievements({ achievements }: { achievements: Achieveme
               marginBottom: "-2rem",
             }}
           >
-            01
+            {String(sectionNumber).padStart(2, "0")}
           </span>
           <h2
             style={{

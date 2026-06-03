@@ -67,26 +67,7 @@ function ProductSlide({ product }: { product: Product }) {
               marginBottom: "0.875rem",
             }}
           >
-            {product.productLink ? (
-              <a
-                href={product.productLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "inherit",
-                  textDecoration: "none",
-                  borderBottom: "2px solid var(--color-accent)",
-                  paddingBottom: "2px",
-                  transition: "opacity 0.2s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.75")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-              >
-                {product.title} ↗
-              </a>
-            ) : (
-              product.title
-            )}
+            {product.title}
           </h3>
 
           {/* Description */}
@@ -102,6 +83,57 @@ function ProductSlide({ product }: { product: Product }) {
           >
             {product.desc}
           </p>
+
+          {/* Links */}
+          {(product.links?.length ?? 0) > 0 && (
+            <div style={{ marginBottom: "var(--space-md, 2rem)" }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "0.78rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  color: "var(--color-charcoal)",
+                  display: "block",
+                  marginBottom: "0.5rem",
+                }}
+              >
+                Product Links
+              </span>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                {product.links!.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "0.68rem",
+                      letterSpacing: "0.05em",
+                      color: "var(--color-accent)",
+                      border: "1px solid rgba(196,75,43,0.25)",
+                      borderRadius: 2,
+                      padding: "0.35em 0.85em",
+                      textDecoration: "none",
+                      transition: "background 0.18s ease, border-color 0.18s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = "rgba(196,75,43,0.08)";
+                      e.currentTarget.style.borderColor = "var(--color-accent)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "transparent";
+                      e.currentTarget.style.borderColor = "rgba(196,75,43,0.25)";
+                    }}
+                  >
+                    {link.label} ↗
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Features */}
           {(product.features?.length ?? 0) > 0 && (
@@ -203,6 +235,7 @@ function ProductSlide({ product }: { product: Product }) {
               </span>
             ))}
           </div>
+
         </div>
 
       </div>
@@ -431,7 +464,7 @@ function RoleBlock({ role }: { role: Role; globalIndex: number }) {
 
 // ─── Experience Section ───────────────────────────────────────────────────────
 
-export default function Experience({ roles }: { roles: Role[] }) {
+export default function Experience({ roles, sectionNumber = 2 }: { roles: Role[]; sectionNumber?: number }) {
   return (
     <section
       id="experience"
@@ -464,7 +497,7 @@ export default function Experience({ roles }: { roles: Role[] }) {
             pointerEvents: "none",
           }}
         >
-          02
+            {String(sectionNumber).padStart(2, "0")}
         </p>
 
         {/* Section title */}
