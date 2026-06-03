@@ -23,7 +23,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Pardeep Kumar — Senior React Native Developer",
   description:
-    "Portfolio of Pardeep Kumar, Senior React Native Developer with 9+ years building production-grade mobile apps for 1M+ users.",
+    "Portfolio of Pardeep Kumar, Senior React Native Developer with 9 years building production-grade mobile apps for 1M+ users.",
 };
 
 export default function RootLayout({

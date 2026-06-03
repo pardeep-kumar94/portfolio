@@ -21,16 +21,19 @@ export async function sendContactEmail(
     return { status: "error", message: "All fields are required." };
   }
 
-  try {
-    await resend.emails.send({
-      from: "Portfolio <hello@pardeep.me>",
-      to: "hello@pardeep.me",
-      replyTo: email,
-      subject: `Message from ${name} <${email}>`,
-      text: `From: ${name}\nEmail: ${email}\n\n${message}`,
-    });
-    return { status: "success" };
-  } catch {
-    return { status: "error", message: "Failed to send. Please try again." };
+  const { data, error } = await resend.emails.send({
+    from: "Portfolio <hello@pardeep.me>",
+    to: "hello@pardeep.me",
+    replyTo: email,
+    subject: `Message from ${name} <${email}>`,
+    text: `From: ${name}\nEmail: ${email}\n\n${message}`,
+  });
+
+  if (error) {
+    console.error("[Resend error]", error);
+    return { status: "error", message: error.message ?? "Failed to send. Please try again." };
   }
+
+  console.log("[Resend success]", data?.id);
+  return { status: "success" };
 }
