@@ -252,11 +252,16 @@ function ContactForm({ inView }: { inView: boolean }) {
   );
   const [showPopup, setShowPopup] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const shownForState = useRef(false);
 
-  // Show popup when submission succeeds
-  if (state.status === "success" && !showPopup) {
+  if (state.status === "success" && !shownForState.current) {
+    shownForState.current = true;
     setShowPopup(true);
     formRef.current?.reset();
+  }
+
+  if (state.status !== "success") {
+    shownForState.current = false;
   }
 
   const inputStyle: React.CSSProperties = {
