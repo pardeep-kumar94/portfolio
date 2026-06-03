@@ -273,6 +273,7 @@ function ContactForm({ inView }: { inView: boolean }) {
   };
 
   return (
+    <>
     {showPopup && <SuccessPopup onClose={() => setShowPopup(false)} />}
 
     <motion.form
@@ -364,6 +365,7 @@ function ContactForm({ inView }: { inView: boolean }) {
         </button>
       </div>
     </motion.form>
+    </>
   );
 }
 
